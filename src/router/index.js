@@ -1,7 +1,4 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-
-Vue.use(Router)
+import { createRouter as _createRouter, createWebHashHistory } from 'vue-router'
 
 /* Layout */
 import Layout from '@/layout'
@@ -373,7 +370,7 @@ export const asyncRoutes = [
   },
 
   {
-    path: 'external-link',
+    path: '/external-link',
     component: Layout,
     children: [
       {
@@ -384,11 +381,11 @@ export const asyncRoutes = [
   },
 
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  { path: '/:pathMatch(.*)*', redirect: '/404', hidden: true }
 ]
 
-const createRouter = () => new Router({
-  // mode: 'history', // require service support
+const createRouter = () => _createRouter({
+  history: createWebHashHistory(), // require service support
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
