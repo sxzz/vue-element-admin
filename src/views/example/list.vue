@@ -2,31 +2,31 @@
   <div class="app-container">
     <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
       <el-table-column align="center" label="ID" width="80">
-        <template slot-scope="scope">
+        <template #default="scope">
           <span>{{ scope.row.id }}</span>
         </template>
       </el-table-column>
 
       <el-table-column width="180px" align="center" label="Date">
-        <template slot-scope="scope">
+        <template #default="scope">
           <span>{{ scope.row.timestamp | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
       </el-table-column>
 
       <el-table-column width="120px" align="center" label="Author">
-        <template slot-scope="scope">
+        <template #default="scope">
           <span>{{ scope.row.author }}</span>
         </template>
       </el-table-column>
 
       <el-table-column width="100px" label="Importance">
-        <template slot-scope="scope">
+        <template #default="scope">
           <svg-icon v-for="n in +scope.row.importance" :key="n" icon-class="star" class="meta-item__icon" />
         </template>
       </el-table-column>
 
       <el-table-column class-name="status-col" label="Status" width="110">
-        <template slot-scope="{row}">
+        <template #default="{row}">
           <el-tag :type="row.status | statusFilter">
             {{ row.status }}
           </el-tag>
@@ -34,7 +34,7 @@
       </el-table-column>
 
       <el-table-column min-width="300px" label="Title">
-        <template slot-scope="{row}">
+        <template #default="{row}">
           <router-link :to="'/example/edit/'+row.id" class="link-type">
             <span>{{ row.title }}</span>
           </router-link>
@@ -42,7 +42,7 @@
       </el-table-column>
 
       <el-table-column align="center" label="Actions" width="120">
-        <template slot-scope="scope">
+        <template #default="scope">
           <router-link :to="'/example/edit/'+scope.row.id">
             <el-button type="primary" size="small" icon="el-icon-edit">
               Edit
