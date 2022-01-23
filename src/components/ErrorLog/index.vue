@@ -6,7 +6,7 @@
       </el-button>
     </el-badge>
 
-    <el-dialog :visible.sync="dialogTableVisible" width="80%" append-to-body>
+    <el-dialog v-model="dialogTableVisible" width="80%" append-to-body>
       <template #title>
         <div>
           <span style="padding-right: 10px;">Error Log</span>
