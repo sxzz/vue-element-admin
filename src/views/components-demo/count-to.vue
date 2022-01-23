@@ -52,11 +52,8 @@
 </template>
 
 <script>
-import countTo from 'vue-count-to'
-
 export default {
   name: 'CountToDemo',
-  components: { countTo },
   data() {
     return {
       setStartVal: 0,
