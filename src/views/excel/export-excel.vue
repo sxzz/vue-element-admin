@@ -37,7 +37,7 @@
       <el-table-column align="center" label="Date" width="220">
         <template #default="scope">
           <i class="el-icon-time" />
-          <span>{{ scope.row.timestamp | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+          <span>{{ parseTime(scope.row.timestamp,'{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
       </el-table-column>
     </el-table>
@@ -69,6 +69,7 @@ export default {
     this.fetchData()
   },
   methods: {
+    parseTime,
     fetchData() {
       this.listLoading = true
       fetchList().then(response => {

@@ -9,7 +9,7 @@
 
       <el-table-column width="180px" align="center" label="Date">
         <template #default="{row}">
-          <span>{{ row.timestamp | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+          <span>{{ parseTime(row.timestamp,'{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
       </el-table-column>
 
@@ -27,7 +27,7 @@
 
       <el-table-column class-name="status-col" label="Status" width="110">
         <template #default="{row}">
-          <el-tag :type="row.status | statusFilter">
+          <el-tag :type="statusFilter(row.status)">
             {{ row.status }}
           </el-tag>
         </template>
@@ -79,19 +79,11 @@
 
 <script>
 import { fetchList } from '@/api/article'
+import { parseTime } from '@/filters'
 
 export default {
   name: 'InlineEditTable',
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'info',
-        deleted: 'danger'
-      }
-      return statusMap[status]
-    }
-  },
+
   data() {
     return {
       list: null,
@@ -106,6 +98,15 @@ export default {
     this.getList()
   },
   methods: {
+    parseTime,
+    statusFilter(status) {
+      const statusMap = {
+        published: 'success',
+        draft: 'info',
+        deleted: 'danger'
+      }
+      return statusMap[status]
+    },
     async getList() {
       this.listLoading = true
       const { data } = await fetchList(this.listQuery)
