@@ -4,14 +4,15 @@
       {{ headerText }}
     </div>
     <draggable
-      :list="list"
+      v-model="list"
       v-bind="$attrs"
       class="board-column-content"
-      :set-data="setData"
     >
-      <div v-for="element in list" :key="element.id" class="board-item">
-        {{ element.name }} {{ element.id }}
-      </div>
+      <template #item="{element}">
+        <div class="board-item">
+          {{ element.name }} {{ element.id }}
+        </div>
+      </template>
     </draggable>
   </div>
 </template>
@@ -40,13 +41,6 @@ export default {
       default() {
         return []
       }
-    }
-  },
-  methods: {
-    setData(dataTransfer) {
-      // to avoid Firefox bug
-      // Detail see : https://github.com/RubaXa/Sortable/issues/1012
-      dataTransfer.setData('Text', '')
     }
   }
 }
